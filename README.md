@@ -152,31 +152,44 @@ Essa resposta é chamada de HTTP Status Code e existem cinco categorias de Statu
 
 Alguns dos mais comuns códigos em respostas REST
 
-* ## 200 - OK - Padrão de resposta para solicitações HTTP sucesso. A resposta real dependerá do método de solicitação usado. Em uma solicitação GET, a resposta conterá uma entidade que corresponde ao recurso solicitado. Em uma solicitação POST a resposta conterá a descrição de uma entidade, ou contendo o resultado da ação.
+* ## 200 - OK
+  - Padrão de resposta para solicitações HTTP sucesso. A resposta real dependerá do método de solicitação usado. Em uma solicitação GET, a resposta conterá uma entidade que corresponde ao recurso solicitado. Em uma solicitação POST a resposta conterá a descrição de uma entidade, ou contendo o resultado da ação.
 
-* ## 201 - Create - O pedido foi cumprido e resultou em um novo recurso que está sendo criado. Usado em solicitação POST e PUT quando criar um novo recurso.
+* ## 201 - Create
+  - O pedido foi cumprido e resultou em um novo recurso que está sendo criado. Usado em solicitação POST e PUT quando criar um novo recurso.
 
-* ## 204 - No Content - O servidor processou a solicitação com sucesso, mas não é necessária nenhuma resposta. Resposta comum na solicitação de um DELETE.
+* ## 204 - No Content
+  - O servidor processou a solicitação com sucesso, mas não é necessária nenhuma resposta. Resposta comum na solicitação de um DELETE.
 
-* ## 400 - Bad Request - O pedido não pôde ser entregue devido à sintaxe incorreta.
+* ## 400 - Bad Request
+  - O pedido não pôde ser entregue devido à sintaxe incorreta.
 
-* ## 401 - Unauthorized - Basicamente usado quando a solicitação exige que o cliente esteja autenticado, entretanto, o cliente ainda não realizou a autenticação. A resposta deve incluir um cabeçalho do campo www-authenticate contendo um desafio aplicável ao recurso solicitado.
+* ## 401 - Unauthorized
+  - Basicamente usado quando a solicitação exige que o cliente esteja autenticado, entretanto, o cliente ainda não realizou a autenticação. A resposta deve incluir um cabeçalho do campo www-authenticate contendo um desafio aplicável ao recurso solicitado.
 
-* ## 403 - Forbidden - O pedido é reconhecido pelo servidor, mas este recusa-se a executá-lo. Ao contrário da resposta “401”, aqui a autenticação não fará diferença e o pedido não deve ser requisitado novamente.
+* ## 403 - Forbidden
+  - O pedido é reconhecido pelo servidor, mas este recusa-se a executá-lo. Ao contrário da resposta “401”, aqui a autenticação não fará diferença e o pedido não deve ser requisitado novamente.
 
-* ## 404 - Not Found - O recurso solicitado não foi encontrado, mas pode ser disponibilizado novamente no futuro. As solicitações subsequentes pelo cliente são permitidas.
+* ## 404 - Not Found
+  - O recurso solicitado não foi encontrado, mas pode ser disponibilizado novamente no futuro. As solicitações subsequentes pelo cliente são permitidas.
 
-* ## 405 - Method Not Allowed - Foi feita uma solicitação de um recurso usando um método de pedido que não é compatível com esse recurso, por exemplo, usando GET em um formulário, que exige que os dados sejam apresentados via POST, PUT; ou usados em um recurso somente de leitura.
+* ## 405 - Method Not Allowed
+  - Foi feita uma solicitação de um recurso usando um método de pedido que não é compatível com esse recurso, por exemplo, usando GET em um formulário, que exige que os dados sejam apresentados via POST, PUT; ou usados em um recurso somente de leitura.
 
-* ## 409 - Conflict - Indica que a solicitação não pôde ser processada por causa do conflito no pedido, como um conflito de edição.
+* ## 409 - Conflict
+  - Indica que a solicitação não pôde ser processada por causa do conflito no pedido, como um conflito de edição.
 
-* ## 422 - Unprocessable Entity - O pedido foi bem formatado, mas foi incapaz de ser seguido devido a erros de semântica.
+* ## 422 - Unprocessable Entity
+  - O pedido foi bem formatado, mas foi incapaz de ser seguido devido a erros de semântica.
 
-* ## 500 - Internal Server Error - Indica um erro do servidor ao processar a solicitação.
+* ## 500
+  - Internal Server Error - Indica um erro do servidor ao processar a solicitação.
 
-* ## 501 - Not Implemented - O servidor ainda não suporta a funcionalidade ativada.
+* ## 501 - Not Implemented
+  - O servidor ainda não suporta a funcionalidade ativada.
 
-* ## 503 - Service Unavailable - O servidor está em manutenção ou não consegue dar conta dos processamentos de recursos devido à sobrecarga do sistema. Isto deve ser uma condição temporária.
+* ## 503 - Service Unavailable
+  - O servidor está em manutenção ou não consegue dar conta dos processamentos de recursos devido à sobrecarga do sistema. Isto deve ser uma condição temporária.
 
 É muito importante que todas as respostas de solicitações possuam um Status Code definido para caso da solicitação ter sido processada ou ter gerado algum tipo de erro. O Status Code é a forma como a aplicação cliente vai saber tratar a resposta da requisição. Por exemplo, se a resposta for 200 o cliente poderá listar os dados recebidos, mas se for 403 poderá informar ao usuário que ele não tem permissão de acesso àquele recurso.
 
