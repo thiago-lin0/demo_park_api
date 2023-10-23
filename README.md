@@ -314,12 +314,12 @@ Por exemplo, se um cliente for criado e um id número 10 for gerado, o Location 
 ### Authorization
 O cabeçalho de autorização é usado pelo cliente para fornecer informações de autenticação, como um token de acesso, para o servidor. Isso permite que o servidor verifique que o cliente está autorizado a acessar o pedido de recurso.
 
-####O formato esperado segue as instruções:
->Authorization: <auth-scheme> <authorization-parameters>
-####Basic Authentication:
->Authorization: Basic <credentials>
-####Bearer Authentication:
->Authorization: Bearer <token>
+O formato esperado segue as instruções:
+**Authorization: <auth-scheme> <authorization-parameters>**
+Basic Authentication:
+**Authorization: Basic <credentials>**
+Bearer Authentication:
+**Authorization: Bearer <token>**
 
 ## WWW-Authenticate
 A API, quando receber uma solicitação a um recurso que necessite de autenticação e o cliente não estiver autenticado, deve responder com o cabeçalho WWW-Authenticate. Essa resposta deve incluir pelo menos um desafio, para indicar quais esquemas de autenticação podem ser usados para acessar o recurso (e quaisquer dados adicionais necessários para cada esquema específico).
