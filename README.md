@@ -102,9 +102,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
 ## Arquivo UsuarioService.java
 
-A classe UsuarioService é um serviço que fornece operações relacionadas a usuários (ou Usuario no contexto do código). Vou explicar o código em detalhes:
+A classe `UsuarioService` é um serviço que fornece operações relacionadas a `usuários` (ou Usuario no contexto do código). Vou explicar o código em detalhes:
 
-Este trecho indica que a classe UsuarioService faz parte do pacote com.tlino.demoparkapi.service.
+Este trecho indica que a classe `UsuarioService` faz parte do pacote `com.tlino.demoparkapi.service`.
 ~~~java
 package com.tlino.demoparkapi.service;
 ~~~
@@ -120,23 +120,23 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 ~~~
 
-A anotação @RequiredArgsConstructor é uma anotação do projeto Lombok que gera um construtor que aceita todos os campos marcados com final como argumentos, tornando a injeção de dependência mais conveniente. A anotação @Service é usada para indicar que esta classe é um componente de serviço gerenciado pelo Spring, o que significa que pode ser injetada em outras partes da aplicação.
+A anotação `@RequiredArgsConstructor` é uma anotação do projeto Lombok que gera um construtor que aceita todos os campos marcados com `final` como argumentos, tornando a injeção de dependência mais conveniente. A anotação `@Service` é usada para indicar que esta classe é um componente de serviço gerenciado pelo Spring, o que significa que pode ser injetada em outras partes da aplicação.
 ~~~java
 @RequiredArgsConstructor
 @Service
 ~~~
 
-Aqui você define a classe UsuarioService.
+Aqui você define a classe `UsuarioService`.
 ~~~java
 public class UsuarioService {
 ~~~
 
-Este é um campo de classe que é marcado como final e é injetado com uma instância de UsuarioRepository no construtor da classe. Isso permite que a classe acesse os métodos do repositório para interagir com os dados do usuário no banco de dados.
+Este é um campo de classe que é marcado como `final` e é injetado com uma instância de `UsuarioRepository` no construtor da classe. Isso permite que a classe acesse os métodos do repositório para interagir com os dados do usuário no banco de dados.
 ~~~java
 private final UsuarioRepository usuarioRepository;
 ~~~
 
-Este método salvar é anotado com @Transactional, o que significa que é executado em uma transação do banco de dados. Ele recebe um objeto Usuario como argumento e o salva no banco de dados usando o método save do usuarioRepository. O método retorna o usuário salvo.
+Este método `salvar` é anotado com `@Transactional`, o que significa que é executado em uma transação do banco de dados. Ele recebe um objeto `Usuario` como argumento e o salva no banco de dados usando o método save do `usuarioRepository`. O método retorna o usuário salvo.
 ~~~java
 @Transactional
 public Usuario salvar(Usuario usuario) {
@@ -144,7 +144,7 @@ public Usuario salvar(Usuario usuario) {
 }
 ~~~~
 
-Este método buscarPorId é anotado com @Transactional com a opção readOnly = true, o que significa que é apenas uma operação de leitura, e não modificará os dados no banco de dados. Ele recebe o ID de um usuário como argumento, busca o usuário correspondente no banco de dados usando o método findById do usuarioRepository, e retorna o usuário encontrado. Se o usuário não for encontrado, lança uma exceção RuntimeException.
+Este método `buscarPorId` é anotado com `@Transactional` com a opção `readOnly = true`, o que significa que é apenas uma operação de leitura, e não modificará os dados no banco de dados. Ele recebe o ID de um usuário como argumento, busca o usuário correspondente no banco de dados usando o método `findById` do `usuarioRepository`, e retorna o usuário encontrado. Se o usuário não for encontrado, lança uma exceção `RuntimeException`.
 ~~~java
 @Transactional(readOnly = true)
 public Usuario buscarPorId(Long id) {
@@ -154,7 +154,7 @@ public Usuario buscarPorId(Long id) {
 }
 ~~~
 
-Este método editarSenha também é anotado com @Transactional e recebe o ID de um usuário e uma nova senha como argumentos. Primeiro, ele chama o método buscarPorId para buscar o usuário pelo ID. Em seguida, atualiza a senha do usuário com a nova senha fornecida e retorna o usuário atualizado.
+Este método `editarSenha` também é anotado com `@Transactional` e recebe o ID de um usuário e uma nova senha como argumentos. Primeiro, ele chama o método `buscarPorId` para buscar o usuário pelo ID. Em seguida, atualiza a senha do usuário com a nova senha fornecida e retorna o usuário atualizado.
 ~~~java
 @Transactional
 public Usuario editarSenha(Long id, String password) {
@@ -164,7 +164,7 @@ public Usuario editarSenha(Long id, String password) {
 }
 ~~~
 
-Este método buscarTodos é anotado com @Transactional com readOnly = true. Ele busca e retorna uma lista de todos os usuários no banco de dados usando o método findAll do usuarioRepository. Essa operação é apenas leitura e não modifica os dados no banco de dados.
+Este método `buscarTodos` é anotado com `@Transactional` com `readOnly = true`. Ele busca e retorna uma lista de todos os usuários no banco de dados usando o método `findAll do usuarioRepository`. Essa operação é apenas leitura e não modifica os dados no banco de dados.
 ~~~java
 @Transactional(readOnly = true)
 public List<Usuario> buscarTodos() {
@@ -172,6 +172,6 @@ public List<Usuario> buscarTodos() {
 }
 ~~~
 
-Em resumo, a classe UsuarioService fornece métodos para realizar operações relacionadas a usuários, como salvar, buscar por ID, editar senha e listar todos os usuários. Os métodos são anotados com @Transactional para garantir que sejam executados dentro de transações do banco de dados, e a injeção de dependência é usada para acessar o repositório de usuários (UsuarioRepository) para realizar operações no banco de dados.
+Em resumo, a classe `UsuarioService` fornece métodos para realizar operações relacionadas a usuários, como salvar, buscar por ID, editar senha e listar todos os usuários. Os métodos são anotados com `@Transactional` para garantir que sejam executados dentro de transações do banco de dados, e a injeção de dependência é usada para acessar o repositório de usuários (`UsuarioRepository`) para realizar operações no banco de dados.
 
 
