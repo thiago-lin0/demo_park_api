@@ -71,5 +71,34 @@ Os últimos três métodos (equals, hashCode e toString) são métodos sobrescri
 
 No geral, esta classe Usuario é usada para mapear objetos Java para registros em uma tabela de banco de dados, e as anotações fornecem informações sobre como essa mapeação deve ser feita. O Lombok é usado para reduzir a quantidade de código "boilerplate" necessário.
 
+## Arquivo UsuarioRepository.java
+
+Esse código é uma interface Java que faz parte de um projeto que utiliza o framework Spring Data JPA para facilitar a persistência de dados em um banco de dados. Vou explicar o código em detalhes:
+
+Este trecho indica que a interface UsuarioRepository faz parte do pacote com.tlino.demoparkapi.repository.
+~~~java
+package com.tlino.demoparkapi.repository;
+~~~
+
+Aqui, você está importando duas classes. A classe Usuario é a entidade que você deseja persistir no banco de dados. A classe JpaRepository é parte do Spring Data JPA e fornece métodos padrão para realizar operações de CRUD (Create, Read, Update, Delete) no banco de dados relacionado à entidade.
+~~~java
+import com.tlino.demoparkapi.entity.Usuario;
+import org.springframework.data.jpa.repository.JpaRepository;
+~~~
+
+Neste trecho, você declara a interface `UsuarioRepository` que estende a interface `JpaRepository`. O `JpaRepository` é parametrizado com dois tipos:
+
+1.`Usuario` (ou seja, a entidade com a qual você deseja trabalhar): Isso indica que você está criando um repositório para a entidade `Usuario`. O Spring Data JPA gera automaticamente as consultas SQL necessárias para operações de CRUD com base nesta entidade.
+
+2.`Long` (ou seja, o tipo da chave primária da entidade): Isso indica o tipo de dado da chave primária da entidade `Usuario`. No caso, a chave primária é do tipo `Long`.
+
+A interface `UsuarioRepository` herda todos os métodos definidos na interface `JpaRepository`, que incluem métodos como `save`, `findById`, `findAll`, `delete`, entre outros. Isso permite que você realize operações de banco de dados sem escrever consultas SQL manualmente. Por exemplo, você pode salvar um novo `Usuario` chamando `usuarioRepository.save(usuario)`, buscar um `Usuario` pelo ID chamando `usuarioRepository.findById(id)`, ou listar todos os Usuario chamando `usuarioRepository.findAll()`, entre outras operações.
+
+Essa interface é uma parte fundamental de como o Spring Data JPA simplifica o acesso e a manipulação de dados em bancos de dados relacionais, permitindo que você se concentre na lógica de negócios em vez de lidar com a camada de persistência de dados.
+~~~java
+public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+}
+~~~
+
 
 
