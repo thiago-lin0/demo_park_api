@@ -174,4 +174,79 @@ public List<Usuario> buscarTodos() {
 
 Em resumo, a classe `UsuarioService` fornece métodos para realizar operações relacionadas a usuários, como salvar, buscar por ID, editar senha e listar todos os usuários. Os métodos são anotados com `@Transactional` para garantir que sejam executados dentro de transações do banco de dados, e a injeção de dependência é usada para acessar o repositório de usuários (`UsuarioRepository`) para realizar operações no banco de dados.
 
+## Arquivo UsuarioController.java
+
+A classe UsuarioController é um controlador que mapeia requisições HTTP para as operações correspondentes do serviço de usuário (UsuarioService). Vou explicar o código em detalhes:
+
+Este trecho indica que a classe UsuarioController faz parte do pacote com.tlino.demoparkapi.web.controller.
+~~~java
+package com.tlino.demoparkapi.web.controller;
+~~~
+
+Aqui, você está importando classes e anotações necessárias para o funcionamento do controlador. A classe Usuario é a entidade que representa um usuário, a classe UsuarioService é usada para executar operações relacionadas a usuários, e várias anotações do Spring Framework são usadas para configurar o controlador.
+~~~java
+import com.tlino.demoparkapi.entity.Usuario;
+import com.tlino.demoparkapi.service.UsuarioService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+~~~
+
+A anotação @RequiredArgsConstructor é do projeto Lombok e gera um construtor que aceita todos os campos marcados com final como argumentos, tornando a injeção de dependência mais conveniente. A anotação @RestController indica que esta classe é um controlador que lida com solicitações HTTP e a anotação @RequestMapping define o caminho base para todas as solicitações mapeadas por este controlador, que é "api/v1/usuarios".
+~~~java
+@RequiredArgsConstructor
+@RestController
+@RequestMapping("api/v1/usuarios")
+~~~
+
+Aqui você define a classe UsuarioController.
+~~~java
+public class UsuarioController {
+~~~
+
+Este é um campo de classe que é injetado com uma instância de UsuarioService no construtor da classe. Isso permite que o controlador acesse os métodos do serviço de usuário para realizar operações.
+~~~java
+private final UsuarioService usuarioService;
+~~~
+
+Este método create é mapeado para solicitações HTTP POST na rota definida pelo @RequestMapping. Ele recebe um objeto Usuario no corpo da solicitação (@RequestBody) que representa o usuário a ser criado. O método chama o serviço usuarioService.salvar(usuario) para salvar o usuário no banco de dados, e retorna uma resposta HTTP com o status "201 Created" e o usuário criado no corpo da resposta.
+~~~java
+@PostMapping
+public ResponseEntity<Usuario> create(@RequestBody Usuario usuario){
+    Usuario user = usuarioService.salvar(usuario);
+    return ResponseEntity.status(HttpStatus.CREATED).body(user);
+}
+~~~
+
+Este método getById é mapeado para solicitações HTTP GET com um parâmetro de caminho ({id}). O método @PathVariable extrai o valor do parâmetro da URL e o usa como o ID do usuário a ser buscado. O método chama o serviço usuarioService.buscarPorId(id) para recuperar o usuário com o ID especificado e retorna uma resposta HTTP com o usuário no corpo da respost
+~~~java
+@GetMapping("/{id}")
+public ResponseEntity<Usuario> getById(@PathVariable Long id){
+    Usuario user = usuarioService.buscarPorId(id);
+    return ResponseEntity.ok(user);
+}
+~~~
+
+Este método updatePassword é mapeado para solicitações HTTP PATCH com um parâmetro de caminho ({id}). O método @PathVariable extrai o valor do parâmetro da URL e o usa como o ID do usuário a ser atualizado. Ele recebe um objeto Usuario no corpo da solicitação que contém a nova senha a ser atribuída ao usuário. O método chama o serviço usuarioService.editarSenha(id, usuario.getPassword()) para atualizar a senha do usuário com o ID especificado e retorna uma resposta HTTP com o usuário atualizado no corpo da resposta.
+~~~java
+@PatchMapping("/{id}")
+public ResponseEntity<Usuario> updatePassword(@PathVariable Long id,@RequestBody Usuario usuario){
+    Usuario user = usuarioService.editarSenha(id, usuario.getPassword());
+    return ResponseEntity.ok(user);
+}
+~~~
+
+Este método getAll é mapeado para solicitações HTTP GET sem parâmetros adicionais. Ele chama o serviço usuarioService.buscarTodos() para recuperar uma lista de todos os usuários e retorna uma resposta HTTP com a lista de usuários no corpo da resposta.
+~~~java
+@GetMapping
+public ResponseEntity<List<Usuario>> getAll(){
+    List<Usuario> users = usuarioService.buscarTodos();
+    return ResponseEntity.ok(users);
+}
+~~~
+
+Em resumo, a classe UsuarioController é responsável por expor endpoints de API REST para criar, recuperar e atualizar registros de usuários. Ela mapeia solicitações HTTP para as operações correspondentes do serviço de usuário (UsuarioService) e retorna respostas HTTP apropriadas, incluindo os dados dos usuários envolvidos. Isso permite que a aplicação interaja com os dados dos usuários por meio de uma API RESTful.
 
